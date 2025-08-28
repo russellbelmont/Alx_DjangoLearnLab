@@ -1,2 +1,2 @@
 ﻿from bookshelf.models import Book
-Book.objects.get(id=book.id)
+Book.objects.get(title="1984")
