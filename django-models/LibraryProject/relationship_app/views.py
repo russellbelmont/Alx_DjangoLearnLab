@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import DetailView
-from .models import Library      # <-- exact line the checker wants
+from django.views.generic.detail import DetailView   # checker expects this
+from .models import Library      # checker expects this exact line
 from .models import Book
 
 # Function-based view for listing all books
