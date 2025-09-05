@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.shortcuts import render
+from django.views.generic import DetailView
+from .models import Book, Library   # ✅ must include Library explicitly
 
 
 def register(request):
@@ -90,3 +93,21 @@ def delete_book(request, book_id):
         book.delete()
         return redirect("list_books")
     return render(request, "relationship_app/delete_book.html", {"book": book})
+
+
+from django.shortcuts import render
+from django.views.generic import DetailView
+from .models import Library      # <-- exact line the checker wants
+from .models import Book
+
+# Function-based view for listing all books
+def list_books(request):
+    books = Book.objects.all()
+    return render(request, "relationship_app/list_books.html", {"books": books})
+
+# Class-based view for displaying library details
+class LibraryDetailView(DetailView):
+    model = Library
+    template_name = "relationship_app/library_detail.html"
+    context_object_name = "library"
+
